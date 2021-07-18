@@ -1,0 +1,23 @@
+{
+  "name": "perfanalytics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "NODE_ENV=development  &&  npm i --prefix dashboard && NODE_ENV=production && npm run build --prefix dashboard",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js",
+    "client": "npm install --prefix dashboard && npm start --prefix dashboard",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.2",
+    "nodemon": "^2.0.12",
+    "uuidv4": "^6.2.11"
+  }
+}

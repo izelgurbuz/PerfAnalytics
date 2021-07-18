@@ -1,0 +1,56 @@
+.analytics_content {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  
+  .chart_container {
+    padding: 10px;
+    flex: 50%;
+    height: 100%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .chart_container {
+      flex: 100%;
+      padding:0.3em;
+    }
+  }
+
+  .date_filter_container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .container_left{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .date_filter {
+    padding: 10px;
+    flex: 10%;
+    height: 100%;
+  }
+  .remove_filter{
+    flex: 5%;
+    height: 100%;
+  }
+  @media only screen and (max-width: 768px) {
+    .date_filter {
+      flex: 40%;
+      padding:0.3em;
+    }
+    .remove_filter{
+      flex: 20%;
+      padding:0.3em;
+    }
+    .container_left{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+  }
+  
