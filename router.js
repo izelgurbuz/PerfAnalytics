@@ -27,6 +27,7 @@ router.get("/dashboard/website/:siteId", async (req, res) => {
         match: {
           createdAt: { $gte: startDate, $lte: endDate },
         },
+        select: "FCP TTFB domLoad windowLoad createdAt -_id"
       })
       .exec();
     if (!website) {

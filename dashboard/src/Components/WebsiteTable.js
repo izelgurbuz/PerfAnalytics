@@ -5,9 +5,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import TablePagination from '@material-ui/core/TablePagination';
 import Paper from "@material-ui/core/Paper";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
@@ -45,27 +45,50 @@ function Row(props) {
   );
 }
 
-export default function WebsiteTable({ data }) {
+export default function WebsiteTable({ data  }) {
   const [rows, setRows] = useState(data);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   useEffect(() => {
     setRows(data);
   }, [data]);
+  useEffect(() => {
+    setPage(0);
+  }, [rows]);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   return (
-    <TableContainer component={Paper}>
-      <Table className="table" aria-label="collapsible table">
+    <Paper >
+      <Table stickyHeader style={{overflow: 'auto'}} className="table" aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell className="text_element" />
-            <TableCell className="text_element"  >URL</TableCell>
-            <TableCell className="text_element" align="right">Website ID</TableCell>
+            <TableCell>URL</TableCell>
+            <TableCell align="right">Website ID</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {rows?.map((row, index) => (
-            <Row key={index} row={row} />
+        <TableBody style={{overflow: 'auto'}}>
+          {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+            <Row  key={index} row={row} />
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 20, 50]}
+        component="div"
+        count={rows?.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 }

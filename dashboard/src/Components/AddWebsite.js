@@ -63,12 +63,12 @@ const AddWebsite = ({ data, setSearchData, setRenderToggle, renderToggle }) => {
     setSearchData(null);
   };
   const searchKeyPress=(e)=>{
-    if(e.keyCode == 13){
+    if(e.keyCode === 13){
       searchKey && handleSearch();
     }
  }
  const addKeyPress=(e)=>{
-  if(e.keyCode == 13){
+  if(e.keyCode === 13){
     newUrl && handleAddWebsite();
   }
 }

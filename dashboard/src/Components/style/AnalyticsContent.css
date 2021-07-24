@@ -30,12 +30,14 @@
   }
   .date_filter {
     padding: 10px;
-    flex: 10%;
     height: 100%;
   }
-  .remove_filter{
-    flex: 5%;
+  .info{
+    flex: 100%;
     height: 100%;
+  }
+  .info p{
+    color: green;
   }
   @media only screen and (max-width: 768px) {
     .date_filter {
