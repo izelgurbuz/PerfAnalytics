@@ -97,10 +97,10 @@ const AnalyticsContent = ({ siteId, open }) => {
           <div key={index} className="chart_container">
             <h3>{x.title}</h3>
             <AnalyticsChart
-              chartData={analytics?.map((item) => item[x.title] ? [
+              chartData={analytics?.map((item) => [
                 new Date(item.createdAt),
-                item[x.title],
-              ]: null)}
+                item[x.title] || 0,
+              ])}
               label={x.title}
               color={x.color}
             />
