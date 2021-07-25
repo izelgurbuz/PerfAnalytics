@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense, lazy, useContext } from "react";
 import { withStyles } from '@material-ui/core/styles';
-import { green , red } from '@material-ui/core/colors';
+import { green , red, yellow, blue } from '@material-ui/core/colors';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
@@ -14,7 +14,7 @@ const WebsiteTable = lazy(() => import('./Components/WebsiteTable'));
 
 
 
-const PurpleSwitch = withStyles({
+const LiveSwitch = withStyles({
   switchBase: {
     color: red[300],
     '&$checked': {
@@ -22,6 +22,20 @@ const PurpleSwitch = withStyles({
     },
     '&$checked + $track': {
       backgroundColor: green[500],
+    },
+  },
+  checked: {},
+  track: {},
+})(Switch);
+
+const DarkModeSwitch = withStyles({
+  switchBase: {
+    color: yellow[300],
+    '&$checked': {
+      color: blue[500],
+    },
+    '&$checked + $track': {
+      backgroundColor: blue[500],
     },
   },
   checked: {},
@@ -38,7 +52,17 @@ function App() {
   const [graphToggle, setGraphToggle] = useState(false);
   const [checked, setChecked] = useState(initialCheck);
   const [intId, setIntId] = useState(null);
+  let mode = localStorage.getItem("darkmode") === "true";
+  const [darkMode, setDarkMode]= useState(mode);
+  const [commonClass, setCommonClass] = useState("");
   
+  useEffect(()=>{
+    setCommonClass(darkMode ? "darkmode_strong":"");
+    darkMode ? 
+    document.body.style.backgroundColor = "#242323" : 
+    document.body.style.backgroundColor = "white";
+  },[darkMode])
+
     useEffect(()=>{
     if(checked){
       const id = setInterval(()=>{
@@ -68,15 +92,21 @@ function App() {
   }, [renderToggle]);
 
   return (
-    <div className="App">
-      <AppBar className="appbar" position="static">
+    <div className={`App ${commonClass}`}>
+      <AppBar className={`appbar ${commonClass}`} position="static">
         <h2 className="title">PerfAnalytics</h2>
         <FormGroup className="switch_container">
           <FormControlLabel 
-            control={<PurpleSwitch checked={checked} onChange={(e)=>{
+            control={<LiveSwitch checked={checked} onChange={(e)=>{
               localStorage.setItem("switch",e.target.checked);
               setChecked(e.target.checked);}} name="checkedA" />}
             label={checked ? "Live" : "Offline"}
+          />
+          <FormControlLabel 
+            control={<DarkModeSwitch checked={darkMode} onChange={(e)=>{
+              dispatch({type:'TOGGLE_DARK_MODE'});
+              setDarkMode(e.target.checked);}} name="checkedA" />}
+            label={darkMode ? "Dark" : "Light"}
           />
         </FormGroup>
       </AppBar>

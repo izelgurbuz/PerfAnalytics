@@ -1,0 +1,28 @@
+.darkmode_light {
+    background-color: #525151 !important;
+    color: white !important;
+  }
+  
+  .darkmode_medium {
+    background-color: #454444 !important;
+    color: white !important;
+  }
+  .darkmode_strong {
+    background-color: #242323 !important;
+    color: white !important;
+  }
+  .darkmode_black_color {
+    color: #242323 !important;
+  }
+
+  .dark_filter .MuiFormLabel-root,
+  .dark_filter .MuiInputBase-input,
+  .dark_filter .MuiIconButton-root{
+    color: white !important;
+  }
+
+  .dark_filter .MuiInput-underline:before,
+  .dark_filter .MuiInput-underline:after{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+  }
+  

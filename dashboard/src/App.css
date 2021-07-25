@@ -3,6 +3,9 @@
 }
 .App {
   text-align: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .App-link {
@@ -16,6 +19,7 @@
 }
 .switch_container{
   display: flex !important;
+  flex-direction: row !important;
   align-items: flex-end;
   margin: 10px;
 }
@@ -41,4 +45,18 @@
   .add_website_container{
     width: 80%;
   }
+}
+
+.darkmode_light {
+  background-color: #888688;
+  color: white;
+}
+
+.darkmode_medium {
+  background-color: #656565 !important;
+  color: white !important;
+}
+.darkmode_strong {
+  background-color: #242323 !important;
+  color: white !important;
 }

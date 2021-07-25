@@ -2,6 +2,7 @@ import 'date-fns';
 import React, { useEffect, useState, useContext } from "react";
 import { useAPI } from "../hooks/useApi";
 import "./style/AnalyticsContent.css";
+import "./style/DarkMode.css";
 import AnalyticsChart from "./AnalyticsChart";
 import {
   MuiPickersUtilsProvider,
@@ -16,15 +17,20 @@ import {AppContext} from "../AppContainer";
 
 const AnalyticsContent = ({ siteId, open }) => {
   const { get } = useAPI();
-  const {state}= useContext(AppContext);
+  const {state: {darkMode,graphToggle}}= useContext(AppContext);
   const [analytics, setAnalytics] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [commonClass, setCommonClass] = useState("");
+  
+  useEffect(()=>{
+    setCommonClass(darkMode ? "dark_filter":"");
+  },[darkMode])
 
   const types = [
     { title: "FCP", color: "blue" },
     { title: "TTFB", color: "red" },
-    { title: "domLoad", color: "black" },
+    { title: "domLoad", color: "yellow" },
     { title: "windowLoad", color: "green" },
   ];
 
@@ -50,7 +56,7 @@ const AnalyticsContent = ({ siteId, open }) => {
         .catch((err) => {
           console.log(err);
         }) : setAnalytics(null);
-  }, [open,startDate,endDate,state.graphToggle]);
+  }, [open,startDate,endDate,graphToggle]);
 
   return (
     <>
@@ -59,18 +65,19 @@ const AnalyticsContent = ({ siteId, open }) => {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <div className="date_filter">
          <KeyboardDateTimePicker
-           className="start_filter"
+           className={`start_filter ${commonClass}`}
            value={startDate}
            onChange={handleStartDateChange}
            label="Start Date"
            onError={console.log}
            minDate={new Date("2018-01-01T00:00")}
            format="yyyy/MM/dd hh:mm a"
+           style={{color:"white"}}
          />
         </div>
         <div className="date_filter">
           <KeyboardDateTimePicker
-           className="end_filter"
+           className={`end_filter ${commonClass}`}
            value={endDate}
            onChange={handleEndDateChange}
            label="End Date"

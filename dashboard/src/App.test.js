@@ -5,7 +5,7 @@ import {AppProvider} from './AppContainer'
 describe('App',()=>{
   
   it('renders succesfuly', () => {
-    const AppComp =  <App />;
+    const AppComp =  <AppProvider><App /></AppProvider>;
     expect(AppComp).toBeTruthy();
   });
 

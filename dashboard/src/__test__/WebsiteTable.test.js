@@ -6,13 +6,13 @@ describe('WebsiteTable Tests',()=>{
   
     it('if table has empty data, # text_element classes is 1', () => {
        const testDataEmpty =[]
-      const  {getByText, getByTestId, container} = render(<WebsiteTable data={testDataEmpty} />);
+      const  {getByText, getByTestId, container} = render(<AppProvider><WebsiteTable data={testDataEmpty} /></AppProvider>);
       const content = container.querySelectorAll('.text_element');
       expect(content.length).toBe(1);
     });
       it('if table has data with at least one element, # text_element classes is greater than 1', () => {
         const testData =[{siteId: "9dde38b9-c122-4340-8fd7-7ef794eb18bc",url: "izelgurbuz.com"}]
-        const  {getByText, getByTestId, container} = render(<WebsiteTable data={testData} />);
+        const  {getByText, getByTestId, container} = render(<AppProvider><WebsiteTable data={testData} /></AppProvider>);
         const content = container.querySelectorAll('.text_element');
         expect(content.length).toBeGreaterThan(1);
       });

@@ -1,5 +1,5 @@
 @media (max-width:400px) {
-    .text_element {
+    .MuiTableCell-body , .text_element {
       font-size: 9px !important;
     }
   }

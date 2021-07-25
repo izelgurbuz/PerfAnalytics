@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import {AppContext} from "../AppContainer";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import "./style/AddWebsite.css";
+import "./style/DarkMode.css";
 import { useAPI } from "../hooks/useApi";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -23,11 +25,17 @@ function validURL(str) {
 
 const AddWebsite = ({ data =[], setSearchData, setRenderToggle, renderToggle }) => {
   const { post } = useAPI();
+  const {state: {darkMode}}= useContext(AppContext);
   const [searchKey, setSearchKey] = useState(null);
   const [newUrl, setNewUrl] = useState(null);
   const [validUrl, setValidUrl] = useState(true);
   const [searchDisabled, setSearchDisabled]= useState(true);
   const [addDisabled, setAddDisabled]= useState(true);
+  const [commonClass, setCommonClass] = useState("");
+  
+  useEffect(()=>{
+    setCommonClass(darkMode ? "darkmode_medium":"");
+  },[darkMode]);
 
   useEffect(() => {
     searchKey?.length === 0 && setSearchData(null);
@@ -74,9 +82,9 @@ const AddWebsite = ({ data =[], setSearchData, setRenderToggle, renderToggle }) 
 }
   return (
     <div className="search_add_container">
-      <Paper className="search_paper">
+      <Paper className={ `search_paper ${commonClass}`}>
         <InputBase
-          className="input"
+          className={`input ${commonClass}`}
           placeholder="Search Url..."
           value={searchKey || ''}
           onChange={(e) => {
@@ -89,7 +97,7 @@ const AddWebsite = ({ data =[], setSearchData, setRenderToggle, renderToggle }) 
         />
         <div className="button_container">
           <IconButton
-            className="icon_button"
+            className={`icon_button ${!searchDisabled && commonClass} `}
             aria-label="search"
             onClick={handleSearch}
             disabled={searchDisabled}
@@ -97,7 +105,7 @@ const AddWebsite = ({ data =[], setSearchData, setRenderToggle, renderToggle }) 
             <SearchIcon  />
           </IconButton>
           <IconButton
-            className="icon_button delete"
+            className={`icon_button delete ${!searchDisabled && commonClass} `}
             aria-label="search"
             onClick={handleRemoveSearch}
             disabled={searchDisabled}
@@ -107,10 +115,10 @@ const AddWebsite = ({ data =[], setSearchData, setRenderToggle, renderToggle }) 
         </div>
       </Paper>
       <Paper
-        className={validUrl ? 'search_paper' :'red_border search_paper'}
+        className={ `search_paper ${commonClass} ${validUrl ? "": "red_border"}`}
       >
         <InputBase
-          className="input add_url"
+          className={`input add_url ${commonClass}`}
           placeholder="Add Url..."
           value={newUrl || ''}
           onChange={(e) => {
@@ -131,7 +139,7 @@ const AddWebsite = ({ data =[], setSearchData, setRenderToggle, renderToggle }) 
           onClick={handleAddWebsite}
           disabled={addDisabled}
         >
-          <AddCircleOutlineIcon style={addDisabled ? {}: {color:"green"} } />
+          <AddCircleOutlineIcon style={addDisabled ? {}: darkMode? {color:"white"}:{color:"green"} } />
         </IconButton>
       </Paper>
     </div>
