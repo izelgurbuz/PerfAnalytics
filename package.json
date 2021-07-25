@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "NODE_ENV=development && cd dashboard && npm i && NODE_ENV=production && npm run build && cd ..",
+    "postinstall": "NODE_ENV=development && cd dashboard && npm i && NODE_ENV=production && CI=false npm run build && cd ..",
     "test": "jest --verbose --coverage=false",
     "test:be:coverage": "jest --collectCoverage=true",
     "server": "nodemon index.js",
