@@ -1,35 +1,16 @@
-import React,{createContext, useReducer,} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {AppProvider} from './AppContainer'
 import reportWebVitals from './reportWebVitals';
-
-export const AppContext = createContext(null);
-
-const initialState={
-  graphToggle : true,
-}
-
-const reducer = (state,action)=>{
-  switch(action.type){
-    case 'TOGGLE_GRAPH_RENDER':
-      return {...state, graphToggle: action.payload};
-    default:
-      return state;
-  }
-}
-
-const AppContainer =()=>{
-  const [state,dispatch]= useReducer(reducer,initialState);
-  return (<AppContext.Provider value={{state,dispatch}} ><App /></AppContext.Provider>)
-}
+import App from './App';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppContainer/>
+    <AppProvider><App/></AppProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root') 
 );
 
 // If you want to start measuring performance in your app, pass a function

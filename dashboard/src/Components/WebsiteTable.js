@@ -25,6 +25,7 @@ function Row(props) {
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
+            className='expand_button'
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -35,7 +36,7 @@ function Row(props) {
       <TableRow>
         <TableCell className="text_element" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
+            <Box className="analytics_content_box" margin={1}>
               <AnalyticsContent siteId={row.siteId} open={open} />
             </Box>
           </Collapse>

@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const AnalyticsChart = ({ key, chartData, label, color }) => {
   return chartData && chartData.length > 0 ? (
+    <div className='chart'>
     <Chart
       width="100%"
       height="100%"
@@ -30,6 +31,7 @@ const AnalyticsChart = ({ key, chartData, label, color }) => {
         colors: [color],
       }}
     />
+    </div>
   ) : (
     <h3>-</h3>
   );

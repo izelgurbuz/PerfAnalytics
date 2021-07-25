@@ -1,8 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import {AppProvider} from './AppContainer'
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('App',()=>{
+  
+  it('renders succesfuly', () => {
+    const AppComp =  <App />;
+    expect(AppComp).toBeTruthy();
+  });
+
+  it('renders title', () => {
+    const { getByText } = render(<AppProvider><App/></AppProvider>);
+    const label = getByText(/PerfAnalytics/i);
+    expect(label).toBeInTheDocument();
+  });
+  it('renders table_container class', () => {
+    const {container} = render(<AppProvider><App/></AppProvider>);
+    const content = container.querySelectorAll('.table_container');
+    expect(content).toBeTruthy();
+  });
+})

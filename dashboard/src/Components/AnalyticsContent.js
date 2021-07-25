@@ -11,7 +11,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import CancelIcon from '@material-ui/icons/Cancel';
 import {Button} from "@material-ui/core/";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {AppContext} from "../index";
+import {AppContext} from "../AppContainer";
 
 
 const AnalyticsContent = ({ siteId, open }) => {
@@ -59,6 +59,7 @@ const AnalyticsContent = ({ siteId, open }) => {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <div className="date_filter">
          <KeyboardDateTimePicker
+           className="start_filter"
            value={startDate}
            onChange={handleStartDateChange}
            label="Start Date"
@@ -69,6 +70,7 @@ const AnalyticsContent = ({ siteId, open }) => {
         </div>
         <div className="date_filter">
           <KeyboardDateTimePicker
+           className="end_filter"
            value={endDate}
            onChange={handleEndDateChange}
            label="End Date"
@@ -81,6 +83,7 @@ const AnalyticsContent = ({ siteId, open }) => {
         {startDate && endDate ?
         (<div className="info">
             <Button
+             className="reset_button"
               style={startDate && endDate ? {color:"red"} : {}}
               onClick={handleRemoveFilter}
               startIcon={<CancelIcon/>}

@@ -9,7 +9,7 @@ import AppBar from "@material-ui/core/AppBar";
 import { useAPI } from "./hooks/useApi";
 import AddWebsite from "./Components/AddWebsite";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {AppContext} from './index';
+import {AppContext} from './AppContainer';
 const WebsiteTable = lazy(() => import('./Components/WebsiteTable'));
 
 

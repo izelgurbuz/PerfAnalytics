@@ -21,7 +21,7 @@ function validURL(str) {
   return !!pattern.test(str);
 }
 
-const AddWebsite = ({ data, setSearchData, setRenderToggle, renderToggle }) => {
+const AddWebsite = ({ data =[], setSearchData, setRenderToggle, renderToggle }) => {
   const { post } = useAPI();
   const [searchKey, setSearchKey] = useState(null);
   const [newUrl, setNewUrl] = useState(null);
@@ -51,7 +51,7 @@ const AddWebsite = ({ data, setSearchData, setRenderToggle, renderToggle }) => {
 
   const handleSearch = () => {
     setSearchData(
-      data.filter((item) => {
+      data?.filter((item) => {
         const url = item.url.toLowerCase();
         return url.includes(searchKey);
       })
@@ -78,7 +78,7 @@ const AddWebsite = ({ data, setSearchData, setRenderToggle, renderToggle }) => {
         <InputBase
           className="input"
           placeholder="Search Url..."
-          value={searchKey}
+          value={searchKey || ''}
           onChange={(e) => {
             e.preventDefault();
             setSearchKey(e.target.value)}}
@@ -97,7 +97,7 @@ const AddWebsite = ({ data, setSearchData, setRenderToggle, renderToggle }) => {
             <SearchIcon  />
           </IconButton>
           <IconButton
-            className="icon_button"
+            className="icon_button delete"
             aria-label="search"
             onClick={handleRemoveSearch}
             disabled={searchDisabled}
@@ -107,13 +107,12 @@ const AddWebsite = ({ data, setSearchData, setRenderToggle, renderToggle }) => {
         </div>
       </Paper>
       <Paper
-        style={validUrl ? {} : { border: "1px solid red" }}
-        className="search_paper"
+        className={validUrl ? 'search_paper' :'red_border search_paper'}
       >
         <InputBase
-          className="input"
+          className="input add_url"
           placeholder="Add Url..."
-          value={newUrl}
+          value={newUrl || ''}
           onChange={(e) => {
             e.preventDefault();
             let temp = e.target.value;
