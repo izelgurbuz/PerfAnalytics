@@ -19,7 +19,7 @@ module.exports = function (controller, app) {
     app.get("/dashboard/website/:siteId", async (req, res) => {
       try {
         const startDate =
-            req.query.startDate || new Date(Date.now() - 30 * 60 * 10000),
+            req.query.startDate || new Date(Date.now() - 30 * 60 * 1000),
           endDate = req.query.endDate || Date.now();
         const website = await controller.getWebsiteWithId(
           req.params.siteId,

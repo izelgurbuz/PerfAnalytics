@@ -47,7 +47,7 @@ const AnalyticsContent = ({ siteId, open }) => {
   
   
   useEffect(() => {
-    let queryString = (startDate && endDate) ? `startDate=${startDate.toString()}&endDate=${endDate.toString()}`: "";
+    let queryString = (startDate && endDate) ? `startDate=${encodeURIComponent(startDate.toString())}&endDate=${encodeURIComponent(endDate.toString())}`: "";
     open ? 
      ((startDate && endDate) || (!startDate && !endDate)) && get(`website`,siteId, queryString)
         .then((result) => {
