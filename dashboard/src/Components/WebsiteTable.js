@@ -1,6 +1,7 @@
 import React, { useState, useEffect,useContext } from "react";
+import { useAPI } from "../hooks/useApi";
 import {AppContext} from "../AppContainer";
-
+import  ConfirmModal from "./ConfirmModal"
 import Box from "@material-ui/core/Box";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
@@ -13,6 +14,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Paper from "@material-ui/core/Paper";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 import AnalyticsContent from "./AnalyticsContent";
 import "./style/WebsiteTable.css";
 import "./style/DarkMode.css";
@@ -27,6 +29,11 @@ function Row(props) {
     setCommonClass(darkMode ? "darkmode_light":"");
   },[darkMode]);
 
+  const handleDelete=(siteId)=>{
+      props.setToDelete(siteId);
+      props.setOpenModal(true);
+  }
+
   return (
     <>
       <TableRow className={commonClass}>
@@ -38,6 +45,14 @@ function Row(props) {
             className={` expand_button ${commonClass}`}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() =>handleDelete(row.siteId)}
+            className={` expand_button ${commonClass}`}
+          >
+             <HighlightOffRoundedIcon/>
           </IconButton>
         </TableCell>
         <TableCell className={commonClass} align="left">{row.url}</TableCell>
@@ -56,12 +71,16 @@ function Row(props) {
   );
 }
 
-export default function WebsiteTable({ data  }) {
+export default function WebsiteTable({ data , renderToggle, setRenderToggle  }) {
   const {state: {darkMode}}= useContext(AppContext);
+  const { post } = useAPI();
   const [rows, setRows] = useState(data);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [commonClass, setCommonClass] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [toDelete, setToDelete] = useState(null);
+  const question = "Do you really want to remove this website?";
   
   useEffect(()=>{
     setCommonClass(darkMode ? "darkmode_medium":"");
@@ -82,8 +101,23 @@ export default function WebsiteTable({ data  }) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const onAgree=()=>{
+    post(`website/${toDelete}`).then((res)=>{
+      setRenderToggle(!renderToggle);
+      setToDelete(null);
+    }).catch((e)=>{
+      console.log(e);
+    })
+  }
+
+  const onDisagree = ()=>{
+      setToDelete(null);
+  }
+
   return (
     <Paper >
+      <ConfirmModal question={question} open={openModal} setOpen={setOpenModal} onAgree={ onAgree } onDisagree={onDisagree} />
       <Table stickyHeader style={{overflow: 'auto'}} className={`table ${commonClass} `} aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -94,7 +128,7 @@ export default function WebsiteTable({ data  }) {
         </TableHead>
         <TableBody style={{overflow: 'auto'}}>
           {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
-            <Row  key={index} row={row} />
+            <Row  key={index} row={row} setToDelete={ setToDelete } setOpenModal={setOpenModal}/>
           ))}
         </TableBody>
       </Table>

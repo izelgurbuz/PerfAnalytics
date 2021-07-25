@@ -1,7 +1,7 @@
 import axios from "axios";
 export const isDev = false;
 export const hostname = isDev ? "212.174.62.230" : window.location.hostname;
-export const baseUrl = "https://4a9ba11b9de8.ngrok.io/dashboard";
+export const baseUrl = "http://localhost:5000/dashboard";
 
 export const useAPI = () => {
   const defaultHeader = {
@@ -62,8 +62,6 @@ export const useAPI = () => {
   };
 
   const del = (endpoint, id, query) => {
-    if (!id)
-      throw new Error("to make a delete you must provide the id and the body");
     const url = `${endpoint}${
       id ? `/${id}${query ? `?${query}` : ""}` : `${query ? `?${query}` : ""}`
     }`;

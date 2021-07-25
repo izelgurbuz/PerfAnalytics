@@ -15,6 +15,19 @@ module.exports = function (controller, app) {
         res.json({ message: error });
       }
     });
+    app.post("/dashboard/website/:siteId", async (req, res) => {
+      const websiteId = req.params.siteId;
+      controller
+        .deleteWebsite(websiteId)
+        .then(({ status, data }) => {
+          res.status(status);
+          res.json(data);
+        })
+        .catch(({ status, message }) => {
+          res.status(status);
+          res.json(message);
+        });
+    });
 
     app.get("/dashboard/website/:siteId", async (req, res) => {
       try {

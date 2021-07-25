@@ -13,8 +13,11 @@ module.exports = function (PORT = 5000) {
       res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "*");
       res.header("Access-Control-Allow-Credentials", "true");
+      res.header("Acces-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+      res.header('Access-Control-Allow-Headers: X-Requested-With');
+
       if (req.method == "OPTIONS") {
-        res.header("Acces-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+        
         return res.status(200).json();
       }
       next();

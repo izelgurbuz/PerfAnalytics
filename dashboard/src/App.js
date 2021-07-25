@@ -120,7 +120,10 @@ function App() {
         </div>
         <div className="table_container">
         <Suspense fallback={<CircularProgress/>}>
-          <WebsiteTable data={searchData || data} />
+          <WebsiteTable 
+            setRenderToggle={setRenderToggle}
+            renderToggle={renderToggle} 
+            data={searchData || data} />
           </Suspense>
         </div>
       </div>
