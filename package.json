@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "NODE_ENV=development  &&  npm i --prefix dashboard && NODE_ENV=production && npm run build --prefix dashboard",
+    "postinstall": "NODE_ENV=development && cd dashboard && npm i && NODE_ENV=production && npm run build && cd ..",
     "test": "jest --verbose --coverage=false",
     "test:be:coverage": "jest --collectCoverage=true",
     "server": "nodemon index.js",
-    "client": "npm install --prefix dashboard && npm start --prefix dashboard",
+    "client": "cd dashboard && npm install && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
@@ -20,6 +20,11 @@
     "mongoose": "^5.13.2",
     "nodemon": "^2.0.12",
     "uuidv4": "^6.2.11"
+  },
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "husky": "^4.3.0",
+    "jest": "^26.6.0"
   },
   "jest": {
     "testEnvironment": "node",
