@@ -1,6 +1,8 @@
 import React, { useEffect, useState, Suspense, lazy, useContext } from "react";
+import Brightness3RoundedIcon from '@material-ui/icons/Brightness3Rounded';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { withStyles } from '@material-ui/core/styles';
-import { green , red, yellow, blue } from '@material-ui/core/colors';
+import { green , red, yellow, grey } from '@material-ui/core/colors';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
@@ -11,8 +13,6 @@ import AddWebsite from "./Components/AddWebsite";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {AppContext} from './AppContainer';
 const WebsiteTable = lazy(() => import('./Components/WebsiteTable'));
-
-
 
 const LiveSwitch = withStyles({
   switchBase: {
@@ -32,10 +32,10 @@ const DarkModeSwitch = withStyles({
   switchBase: {
     color: yellow[300],
     '&$checked': {
-      color: blue[500],
+      color: grey[100],
     },
     '&$checked + $track': {
-      backgroundColor: blue[500],
+      backgroundColor: grey[500],
     },
   },
   checked: {},
@@ -103,10 +103,9 @@ function App() {
             label={checked ? "Live" : "Offline"}
           />
           <FormControlLabel 
-            control={<DarkModeSwitch checked={darkMode} onChange={(e)=>{
+            control={<DarkModeSwitch  checkedIcon={<Brightness3RoundedIcon/>} icon={<WbSunnyIcon/>} checked={darkMode} onChange={(e)=>{
               dispatch({type:'TOGGLE_DARK_MODE'});
               setDarkMode(e.target.checked);}} name="checkedA" />}
-            label={darkMode ? "Dark" : "Light"}
           />
         </FormGroup>
       </AppBar>
