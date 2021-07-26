@@ -15,6 +15,12 @@ const MetricsSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  resourceLoadTimes:[{
+    name: String,
+    duration: Number,
+    initiatorType: String,
+    transferSize: Number
+  }]
 });
 
 module.exports = mongoose.model("Metrics", MetricsSchema);

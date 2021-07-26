@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Brightness3RoundedIcon from '@material-ui/icons/Brightness3Rounded';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,7 +12,7 @@ import { useAPI } from "./hooks/useApi";
 import AddWebsite from "./Components/AddWebsite";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {AppContext} from './AppContainer';
-const WebsiteTable = lazy(() => import('./Components/WebsiteTable'));
+import WebsiteTable from './Components/WebsiteTable';
 
 const LiveSwitch = withStyles({
   switchBase: {
@@ -119,12 +119,13 @@ function App() {
           />
         </div>
         <div className="table_container">
-        <Suspense fallback={<CircularProgress/>}>
-          <WebsiteTable 
-            setRenderToggle={setRenderToggle}
-            renderToggle={renderToggle} 
-            data={searchData || data} />
-          </Suspense>
+        {searchData || data ? 
+        (<WebsiteTable 
+          setRenderToggle={setRenderToggle}
+          renderToggle={renderToggle} 
+          data={searchData || data} />)
+        : (<CircularProgress/>)}
+          
         </div>
       </div>
     </div>

@@ -1,3 +1,23 @@
+.no_list{
+  width: 100%;
+  text-align: center;
+}
+.resource_container{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.first{
+  width: 60%;
+}
+.second{
+  width: 40%;
+}
+.resource_text{
+  text-align: start;
+  margin: 15px;
+}
+
 .analytics_content {
     display: flex;
     flex-wrap: wrap;
@@ -14,6 +34,20 @@
     .chart_container {
       flex: 100%;
       padding:0.3em;
+    }
+    .resource_container{
+      flex-direction: row;
+    }
+    .resource_text{
+      font-size: xx-small; 
+      margin: auto;
+    }
+    .first{
+      flex: 100%;
+    }
+    .second{
+      flex: 100%;
+      margin-bottom: 5px;
     }
   }
 
@@ -53,6 +87,19 @@
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
+    }
+    .resource_container{
+      flex-direction: row;
+    }
+    .resource_text{
+      font-size: xx-small;
+      margin: auto;
+    }
+    .first{
+      flex: 100%;
+    }
+    .second{
+      flex: 100%;
     }
   }
   

@@ -22,7 +22,7 @@ module.exports = function () {
             match: {
               createdAt: { $gte: startDate, $lte: endDate },
             },
-            select: "FCP TTFB domLoad windowLoad createdAt -_id",
+            select: "FCP TTFB domLoad windowLoad createdAt resourceLoadTimes -_id",
           })
           .exec()
       );
@@ -72,13 +72,14 @@ module.exports = function () {
     });
   this.collect = (params, exists) => {
     return new Promise((resolve, reject) => {
-      const { FCP, TTFB, domLoad, windowLoad } = params || {};
+      const { FCP, TTFB, domLoad, windowLoad, resourceLoadTimes } = params || {};
       const metric = new Metrics({
         websiteId: exists._id,
         FCP,
         TTFB,
         domLoad,
         windowLoad,
+        resourceLoadTimes
       });
       metric
         .save()

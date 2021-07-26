@@ -26,16 +26,16 @@ function PerfAnalytics(_siteIdentifier) {
         performance.timing.domContentLoadedEventEnd -
         performance.timing.navigationStart,
       windowLoad: Date.now() - performance.timing.navigationStart,
-      //   resourceLoadTimes: performance
-      //     .getEntriesByType("resource")
-      //     .map((element) => {
-      //       return {
-      //         name: element.name,
-      //         duration: element.duration,
-      //         transferSize: element.transferSize,
-      //         initiatorType: element.initiatorType,
-      //       };
-      //     }),
+        resourceLoadTimes: performance
+          .getEntriesByType("resource")
+          .map((element) => {
+            return {
+              name: element.name,
+              duration: element.duration,
+              transferSize: element.transferSize,
+              initiatorType: element.initiatorType,
+            };
+          }),
     };
   }
 
