@@ -8,7 +8,7 @@ describe('WebsiteTable Tests',()=>{
        const testDataEmpty =[]
       const  {getByText, getByTestId, container} = render(<AppProvider><WebsiteTable data={testDataEmpty} /></AppProvider>);
       const content = container.querySelectorAll('.text_element');
-      expect(content.length).toBe(1);
+      expect(content.length).toBe(0);
     });
       it('if table has data with at least one element, # text_element classes is greater than 1', () => {
         const testData =[{siteId: "9dde38b9-c122-4340-8fd7-7ef794eb18bc",url: "izelgurbuz.com"}]
@@ -23,7 +23,7 @@ describe('WebsiteTable Tests',()=>{
 
       it('after expanding a row, analytics_content_box appears', () => {
       const  {getByText, getByTestId, container} = render(<AppProvider><WebsiteTable data={testData} /></AppProvider>);
-      const targetButton = container.querySelector('.expand_button');
+      const targetButton = container.querySelector('.expand_test');
       fireEvent.click(targetButton);
       expect(container.querySelector('.analytics_content_box')).toBeTruthy();
     });

@@ -46,7 +46,7 @@ function Row(props) {
             aria-label="expand row"
             size="small"
             onClick={() => handleDelete(row.siteId)}
-            className={` expand_button ${commonClass}`}
+            className={`expand_button ${commonClass}`}
           >
             <HighlightOffRoundedIcon />
           </IconButton>
@@ -54,7 +54,7 @@ function Row(props) {
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            className={` expand_button ${commonClass}`}
+            className={` expand_button expand_test ${commonClass}`}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
