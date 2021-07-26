@@ -1,4 +1,7 @@
-
+.center{
+  width: 100%;
+  text-align: center;
+}
 
 @media (max-width:400px) {
     .MuiTableCell-body , .text_element {

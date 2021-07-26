@@ -133,8 +133,8 @@ export default function WebsiteTable({ data, renderToggle, setRenderToggle }) {
     setToDelete(null);
   };
 
-  return (
-    <Paper>
+  return rows && rows.length > 0 ? (
+        <Paper>
       <ConfirmModal
         question={question}
         open={openModal}
@@ -142,7 +142,7 @@ export default function WebsiteTable({ data, renderToggle, setRenderToggle }) {
         onAgree={onAgree}
         onDisagree={onDisagree}
       />
-      <Table
+        <Table
         stickyHeader
         style={{ overflow: "auto" }}
         className={`table ${commonClass} `}
@@ -158,28 +158,29 @@ export default function WebsiteTable({ data, renderToggle, setRenderToggle }) {
           </TableRow>
         </TableHead>
         <TableBody style={{ overflow: "auto" }}>
-          {rows
-            ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => (
-              <Row
-                key={index}
-                row={row}
-                setToDelete={setToDelete}
-                setOpenModal={setOpenModal}
-              />
-            ))}
+          
+            {rows
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => (
+                <Row
+                  key={index}
+                  row={row}
+                  setToDelete={setToDelete}
+                  setOpenModal={setOpenModal}
+                />
+              ))}
         </TableBody>
       </Table>
       <TablePagination
-        className={commonClass}
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows?.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
-  );
+      className={commonClass}
+      rowsPerPageOptions={[5, 10, 25]}
+      component="div"
+      count={rows?.length}
+      rowsPerPage={rowsPerPage}
+      page={page}
+      onPageChange={handleChangePage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+    /> </Paper>) : (
+            <div className="center"><CircularProgress /></div>
+          )
 }

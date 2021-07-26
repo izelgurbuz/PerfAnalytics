@@ -17,7 +17,6 @@ import Tab from "@material-ui/core/Tab";
 import Paper from "@material-ui/core/Paper";
 import { FixedSizeList } from "react-window";
 import { AppContext } from "../AppContainer";
-import Divider from "@material-ui/core/Divider";
 
 const ResourceList = ({ data }) => {
   console.log(data, "data");
@@ -193,7 +192,7 @@ const AnalyticsContent = ({ siteId, open }) => {
         </div>
       </div>
       <div className="analytics_content">
-        {analytics ? tabContent() : <CircularProgress />}
+        {analytics ? tabContent() : <div className="no_list"><CircularProgress /></div>}
       </div>
     </>
   );
