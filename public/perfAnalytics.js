@@ -48,7 +48,7 @@ function PerfAnalytics(_siteIdentifier) {
     };
 
     var http = new XMLHttpRequest();
-    var url = "https://4a9ba11b9de8.ngrok.io/analytics/collect";
+    var url = "https://izelgurbuz-perfanalytics.herokuapp.com/analytics/collect";
 
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/json");
