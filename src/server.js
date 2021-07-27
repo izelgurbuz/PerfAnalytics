@@ -28,6 +28,13 @@ module.exports = function (PORT = 5000) {
     const router = new Router(controller, app);
     router.initRoutes();
 
+    app.use(express.static(path.join(__dirname, './dashboard/build')));
+    ['/dashboard', '/dashboard/*'].forEach(p => {
+        app.get(p, (req, res) => {
+    	res.sendFile(path.resolve(__dirname, './dashboard', 'build', 'index.html'));
+  	});
+     });
+
     app.listen(PORT);
   };
 };
