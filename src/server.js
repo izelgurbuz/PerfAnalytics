@@ -23,11 +23,6 @@ module.exports = function (PORT = 5000) {
       next();
     });
     app.use(express.static("public"));
-
-    const controller = new Controller();
-    const router = new Router(controller, app);
-    router.initRoutes();
-
     app.use(express.static(path.join(__dirname, './dashboard/build')));
     ['/dashboard', '/dashboard/*'].forEach(p => {
         app.get(p, (req, res) => {
@@ -35,6 +30,12 @@ module.exports = function (PORT = 5000) {
   	});
      });
 
+
+    const controller = new Controller();
+    const router = new Router(controller, app);
+    router.initRoutes();
+
+   
     app.listen(PORT);
   };
 };
