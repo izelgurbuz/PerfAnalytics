@@ -150,9 +150,9 @@ export default function WebsiteTable({ data, renderToggle, setRenderToggle }) {
       >
         <TableHead>
           <TableRow>
-            <TableCell className={`text_element ${commonClass}`} />
-            <TableCell className={commonClass}>URL</TableCell>
-            <TableCell className={commonClass} align="right">
+            <TableCell className={`text_element purple ${commonClass}`} />
+            <TableCell className={`purple ${commonClass}`}>URL</TableCell>
+            <TableCell className={`purple ${commonClass}`} align="right">
               Website ID
             </TableCell>
           </TableRow>

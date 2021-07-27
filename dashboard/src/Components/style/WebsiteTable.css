@@ -2,7 +2,11 @@
   width: 100%;
   text-align: center;
 }
-
+.purple{
+  background-color: #3f51b5 !important;
+    color: white !important;
+    opacity: 0.4;
+}
 @media (max-width:400px) {
     .MuiTableCell-body , .text_element {
       font-size: 9px !important;
