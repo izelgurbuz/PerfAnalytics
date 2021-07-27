@@ -10,7 +10,8 @@
     "test:fe:dashboard": "cd dashboard && npm run test && cd ..",
     "server": "nodemon index.js",
     "client": "cd dashboard && npm install && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "nodemon index.js",
   },
   "author": "",
   "license": "ISC",
