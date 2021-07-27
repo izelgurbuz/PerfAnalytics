@@ -21,6 +21,8 @@ of 3 subsystem;
 3.1. [JS Script Usage](#script-usage)
 3.2. [Dashboard Usage](#dashboard-usage)
 4. [API](#api)
+5. [Tests](#tests)
+6. [CI/CD](#cicd)
 
 ### Project Setup
 Copy `.env.example` file to `.env` by 
@@ -48,6 +50,13 @@ To run PerfAnalytics on development environment, you only need to run one tiny c
 npm run dev
 ```
 
+OR
+
+You can use docker image as follows;
+
+```bash
+docker run -p 8080:8080 -e PORT=8080 -d izelgurbuz/perfanalytics
+```
 ### Usage
 
 #### JS Script Usage
@@ -127,3 +136,19 @@ Required Payload
     windowLoad: 3418,  
 }
 ```
+
+### Tests
+
+You can run backend and frontend tests seperately by;
+
+```bash
+npm run test && npm run test:fe:dashboard && test:be:coverage
+```
+
+<b>Load Test result (proof of 200rps )</b>
+<img src="images/loadtest.png?raw=true" width="100%" />
+
+
+### CI/CD
+Github Actions is configured to deploy on every push to master branch.
+Both Docker and Heroku are dependent on the tests result and deployed upon tests successes.

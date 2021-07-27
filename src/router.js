@@ -10,7 +10,7 @@ module.exports = function (controller, app) {
     app.get("/dashboard/websites", async (req, res) => {
       try {
         const websites = await controller.getWebsites();
-        res.json(websites);
+        res.json(websites?.reverse());
       } catch (error) {
         res.json({ message: error });
       }
