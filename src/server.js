@@ -24,7 +24,7 @@ module.exports = function (PORT = 5000) {
       next();
     });
     app.use(express.static("public"));
-    app.use(express.static(path.join(__dirname, './dashboard/build')));
+    app.use(express.static("dashboard/build"));
     ['/perfAnalytics' ,'/perfAnalytics/*'].forEach(p => {
       app.get(p, (req, res) => {
           res.sendFile(path.resolve('./dashboard', 'build', 'index.html'));
