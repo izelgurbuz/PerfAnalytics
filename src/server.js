@@ -36,6 +36,6 @@ module.exports = function (PORT = 5000) {
     router.initRoutes();
 
    
-    app.listen(PORT);
+    app.listen(process.env.port || PORT);
   };
 };
