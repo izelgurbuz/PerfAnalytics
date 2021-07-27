@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "postinstall": "NODE_ENV=development && cd dashboard && npm i && NODE_ENV=production && CI=false npm run build && cd ..",
     "test": "jest --verbose --coverage=false --testTimeout=10000 && npm run test:fe:dashboard",
     "test:be:coverage": "jest --collectCoverage=true",
     "test:fe:dashboard": "cd dashboard && npm run test && cd ..",
     "server": "nodemon index.js",
     "client": "cd dashboard && npm install && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "start": "nodemon index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
