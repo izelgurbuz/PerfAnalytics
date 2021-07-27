@@ -1,6 +1,5 @@
 {
   "name": "dashboard",
-  "homepage": "https://mustafaculban.com/trendyol",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
