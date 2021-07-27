@@ -1,7 +1,6 @@
 import axios from "axios";
 export const isDev = false;
-export const hostname = isDev ? "212.174.62.230" : window.location.hostname;
-export const baseUrl = "https://izelgurbuz-perfanalytics.herokuapp.com";
+export const baseUrl = "https://izelgurbuz-perfanalytics.herokuapp.com/dashboard";
 
 export const useAPI = () => {
   const defaultHeader = {
