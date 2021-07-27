@@ -1,6 +1,7 @@
 const express = require("express");
 const Router = require("./router");
 const Controller = require("./controller");
+const path = require('path');
 
 module.exports = function (PORT = 5000) {
   this.serve = function () {
@@ -23,11 +24,19 @@ module.exports = function (PORT = 5000) {
       next();
     });
     app.use(express.static("public"));
+    app.use(express.static(path.join(__dirname, './dashboard/build')));
+    ['/dashboard', '/dashboard/*'].forEach(p => {
+        app.get(p, (req, res) => {
+    	res.sendFile(path.resolve(__dirname, './dashboard', 'build', 'index.html'));
+  	});
+     });
+
 
     const controller = new Controller();
     const router = new Router(controller, app);
     router.initRoutes();
 
-    app.listen(PORT);
+   
+    app.listen(process.env.port || PORT);
   };
 };
