@@ -1,6 +1,6 @@
 # PerfAnalytics
 
-- https://izelgurbuz-perfanalytics.herokuapp.com/
+- https://izelgurbuz-perfanalytics.herokuapp.com/ (The script is added to https://mustafaculban.com. To see actual data examples on system you can search for this website and change the time interval )
 
 <p float="left">
   <img src="images/dark.png?raw=true" width="49%" />
